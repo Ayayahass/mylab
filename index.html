@@ -2,38 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Lessons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    video {
+      margin-top: 20px;
+      width: 70%;
+      max-width: 800px;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align: center; padding: 50px;">
-
+<body>
   <h1>🎓 My Lessons</h1>
 
-  <button onclick="checkPass('lesson1')">Lesson 1</button>
-  <button onclick="checkPass('lesson2')">Lesson 2</button>
+  <!-- أزرار الدروس -->
+  <div>
+    <button onclick="loadLesson(1)">Lesson 1</button>
+    <button onclick="loadLesson(2)">Lesson 2</button>
+  </div>
 
-  <div id="video-container" style="margin-top:20px;"></div>
+  <!-- مشغل الفيديو -->
+  <div>
+    <video id="lessonVideo" controls>
+      <source id="videoSource" src="" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+  </div>
 
   <script>
-    const passwords = {
-      lesson1: "1234",
-      lesson2: "5678"
-    };
+    function loadLesson(num) {
+      const video = document.getElementById("lessonVideo");
+      const source = document.getElementById("videoSource");
 
-    const videos = {
-      lesson1: "lesson1.mp4",
-      lesson2: "lesson2.mp4"
-    };
-
-    function checkPass(lesson) {
-      const input = prompt("Enter password for " + lesson);
-      if (input === passwords[lesson]) {
-        document.getElementById("video-container").innerHTML =
-          `<video width="400" controls>
-            <source src="https://drive.google.com/uc?export=download&id=1yUocpVSD5JV679rdSMC_NgXxrA8Cdz7J" type="video/mp4">
-          </video>`;
-      } else {
-        alert("Wrong password!");
+      if (num === 1) {
+        source.src = "https://drive.google.com/uc?export=download&id=1yUocpVSD5JV679rdSMC_NgXxrA8Cdz7J";
+      } else if (num === 2) {
+        source.src = "https://drive.google.com/uc?export=download&id=PUT_ANOTHER_FILE_ID_HERE";
       }
+
+      video.load(); // تحديث الفيديو بعد تغيير الرابط
+      video.play(); // تشغيل الفيديو تلقائي
     }
   </script>
 </body>
