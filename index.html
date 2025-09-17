@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Lessons</title>
+</head>
+<body style="font-family: Arial; text-align: center; padding: 50px;">
+
+  <h1>🎓 My Lessons</h1>
+
+  <button onclick="checkPass('lesson1')">Lesson 1</button>
+  <button onclick="checkPass('lesson2')">Lesson 2</button>
+
+  <div id="video-container" style="margin-top:20px;"></div>
+
+  <script>
+    const passwords = {
+      lesson1: "1234",
+      lesson2: "5678"
+    };
+
+    const videos = {
+      lesson1: "lesson1.mp4",
+      lesson2: "lesson2.mp4"
+    };
+
+    function checkPass(lesson) {
+      const input = prompt("Enter password for " + lesson);
+      if (input === passwords[lesson]) {
+        document.getElementById("video-container").innerHTML =
+          `<video width="400" controls>
+            <source src="${videos[lesson]}" type="video/mp4">
+          </video>`;
+      } else {
+        alert("Wrong password!");
+      }
+    }
+  </script>
+</body>
+</html>
