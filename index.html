@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Lessons</title>
+  <title>دروسي</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,12 +30,11 @@
   </style>
 </head>
 <body>
-  <h1>🎓 My Lessons</h1>
+  <h1>🎓 دروسي</h1>
 
-  <!-- أزرار الدروس -->
+  <!-- الأزرار -->
   <div>
-    <button onclick="loadLesson(1)">Lesson 1</button>
-    <button onclick="loadLesson(2)">Lesson 2</button>
+    <button onclick="loadLesson(1)">الدرس ١</button>
   </div>
 
   <!-- مشغل الفيديو -->
@@ -52,13 +51,12 @@
       const source = document.getElementById("videoSource");
 
       if (num === 1) {
+        // رابط مباشر للفيديو من Google Drive
         source.src = "https://drive.google.com/uc?export=download&id=1yUocpVSD5JV679rdSMC_NgXxrA8Cdz7J";
-      } else if (num === 2) {
-        source.src = "https://drive.google.com/uc?export=download&id=PUT_ANOTHER_FILE_ID_HERE";
       }
 
-      video.load(); // تحديث الفيديو بعد تغيير الرابط
-      video.play(); // تشغيل الفيديو تلقائي
+      video.load();
+      video.play();
     }
   </script>
 </body>
