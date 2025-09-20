@@ -1,106 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phonics Practice Lab</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phonics Lab</title>
 
-  <!-- استدعاء Tailwind CSS من CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- أيقونات Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    body {
-      direction: rtl;
-      font-family: sans-serif;
-    }
-    .btn {
-      @apply px-4 py-2 rounded-lg shadow-md transition w-full mb-2;
-    }
-    .btn-primary {
-      @apply bg-blue-600 text-white hover:bg-blue-700;
-    }
-    .btn-secondary {
-      @apply bg-gray-200 hover:bg-gray-300;
-    }
-  </style>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center p-6">
+    <!-- ملف التنسيقات -->
+    <link rel="stylesheet" href="style.css" />
 
-  <div class="bg-white shadow-lg rounded-2xl w-full max-w-md p-6">
-    <h1 class="text-2xl font-bold mb-4 text-center">🔤 Phonics Practice Lab</h1>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  </head>
+  <body>
+    <div id="root"></div>
 
-    <!-- إدخال الكلمة -->
-    <input 
-      id="wordInput"
-      type="text"
-      placeholder="أدخل كلمة للتدريب"
-      class="border w-full p-2 rounded-lg mb-4"
-    />
-
-    <!-- زر التسجيل -->
-    <button id="recordBtn" class="btn btn-primary">🎤 سجل صوتك</button>
-
-    <!-- زر تشغيل الصوت -->
-    <button id="playBtn" class="btn btn-secondary" disabled>🔈 استمع لتسجيلك</button>
-  </div>
-
-  <script>
-    let isRecording = false;
-    let isPlaying = false;
-    let audioUrl = null;
-    let mediaRecorder;
-
-    const recordBtn = document.getElementById("recordBtn");
-    const playBtn = document.getElementById("playBtn");
-
-    // بدء التسجيل
-    recordBtn.addEventListener("click", async () => {
-      if (isRecording) return;
-
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
-        const chunks = [];
-
-        mediaRecorder.ondataavailable = (e) => {
-          chunks.push(e.data);
-        };
-
-        mediaRecorder.onstop = () => {
-          const blob = new Blob(chunks, { type: "audio/webm" });
-          audioUrl = URL.createObjectURL(blob);
-          playBtn.disabled = false;
-        };
-
-        mediaRecorder.start();
-        isRecording = true;
-        recordBtn.textContent = "⏺ جاري التسجيل...";
-
-        setTimeout(() => {
-          mediaRecorder.stop();
-          isRecording = false;
-          recordBtn.textContent = "🎤 سجل صوتك";
-        }, 3000);
-      } catch (err) {
-        alert("خطأ في التسجيل: " + err.message);
-      }
-    });
-
-    // تشغيل الصوت
-    playBtn.addEventListener("click", () => {
-      if (!audioUrl || isPlaying) return;
-
-      const audio = new Audio(audioUrl);
-      isPlaying = true;
-      playBtn.textContent = "🔊 جاري التشغيل...";
-      audio.play();
-      audio.onended = () => {
-        isPlaying = false;
-        playBtn.textContent = "🔈 استمع لتسجيلك";
-      };
-    });
-  </script>
-</body>
+    <!-- استدعاء ملف JavaScript -->
+    <script type="module" src="app.js"></script>
+  </body>
 </html>
