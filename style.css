@@ -1,0 +1,13 @@
+/* تخصيص الخطوط والصفحة العامة */
+body {
+  direction: rtl;
+  font-family: "Tajawal", sans-serif;
+}
+
+/* صندوق التطبيق */
+.app-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
